@@ -6,10 +6,9 @@ Monkey patches
 
 Unfortunately we have to rely on a set of monkey patches. These are
 `loaded from funfactory
-<https://github.com/mozilla/funfactory/blob/master/funfactory/monkeypatches.py>`_
-actually. 
+<https://github.com/mozilla/funfactory/blob/master/funfactory/monkeypatches.py>`_. 
 
-Why this works is because the first installed app is always
+This works because the first installed app is always
 ``funfactory`` and the first thing Django does after configuring itself
 (i.e. ``django.conf.settings`` is a module) is to load the
 ``models.py`` file from every installed app. 
@@ -25,6 +24,7 @@ relevant app is in your ``INSTALLED_APPS``.
 
 .. note::
 
-   Because we're relying on a Django specific trick (that models.py
-   are always loaded) the ``monkeypatches.patch()`` function will
-   write to ``logging.debug()``
+   Because monkey patching is evil and can cause untoward side
+   effects, we log a ``debug`` message. Hopefully this will remind you
+   when you get an odd traceback, to see if perhaps this monkey
+   patching was to blame.
